@@ -129,3 +129,70 @@ Budget Buddy/
 <pre>
 pip install flask flask_mysqldb
 </pre>
+
+<h3>2️⃣ Configure Database in <code>app.py</code></h3>
+
+<pre>
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'yourpassword'
+app.config['MYSQL_DB'] = 'budgetbuddy'
+</pre>
+
+<h3>3️⃣ Run the Application</h3>
+
+<pre>
+python app.py
+</pre>
+
+<p>
+Now open the app in your browser:<br>
+<b>http://127.0.0.1:5000/</b>
+</p>
+
+<hr>
+
+<h2>📈 Key Highlights</h2>
+
+<ul>
+  <li>Full Flask + MySQL implementation</li>
+  <li>Complete authentication system</li>
+  <li>Dynamic budget creation & category allocation</li>
+  <li>Real-time expense updates and progress tracking</li>
+  <li>Streak counter for months under budget</li>
+  <li>History + downloadable reports support (optional)</li>
+  <li>Clean folder structure for easy maintenance</li>
+</ul>
+
+<hr>
+
+<h2>🎯 Future Enhancements</h2>
+
+<ul>
+  <li>Integrate Chart.js for better visual analytics</li>
+  <li>Export monthly reports (PDF / CSV)</li>
+  <li>Email reminders for weekly/monthly spending</li>
+  <li>AI-based suggestions for saving money</li>
+  <li>Full mobile-responsive dashboard</li>
+</ul>
+
+<hr>
+
+<h2>👥 Team Members</h2>
+
+<ul>
+  <li><b>Kammala Kalyan</b></li>
+  <li><b>Kovouru Venkata Naga Sai Pranav</b></li>
+  <li><b>Amarnath Gowda KM</b></li>
+</ul>
+
+<hr>
+
+<h2>🏁 Conclusion</h2>
+
+<p>
+Budget Buddy is a fully functional money management system that simplifies personal budgeting.  
+Built using Flask, MySQL, HTML, CSS, and JavaScript, the project demonstrates strong understanding  
+of DBMS concepts, backend logic, frontend templating, and full-stack application design.  
+This project can be improved further with analytics, automation, and UI enhancements.
+</p>

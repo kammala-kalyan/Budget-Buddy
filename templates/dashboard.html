@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .dashboard-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(47, 133, 90, 0.15);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  .dashboard-container h2 {
+    color: #2f855a;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  .dashboard-container p {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 30px;
+  }
+  .dashboard-container p strong {
+    color: #000000;
+    font-weight: 700;
+  }
+  .btn-custom {
+    min-width: 200px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 12px 25px;
+    margin: 0 10px 20px 10px;
+    box-shadow: 0 6px 12px rgba(47, 133, 90, 0.25);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .btn-custom.btn-primary {
+    background-color: #2f855a;
+    border: none;
+  }
+  .btn-custom.btn-primary:hover {
+    background-color: #276749;
+    box-shadow: 0 8px 20px rgba(39, 103, 73, 0.4);
+  }
+  .btn-custom.btn-success {
+    background-color:  #e53e3e;
+    border: none;
+  }
+  .btn-custom.btn-success:hover {
+    background-color: #c53030;
+    box-shadow: 0 8px 20px rgba(47, 133, 90, 0.4);
+  }
+  .btn-custom.btn-info {
+    background-color: rgb(234, 144, 40);
+    border: none;
+  }
+  .btn-custom.btn-info:hover {
+    background-color: rgb(239, 143, 34);
+    box-shadow: 0 8px 20px rgba(49, 130, 206, 0.4);
+  }
+  .btn-custom.btn-warning {
+    background-color: var(--color-warning);
+    color: #000;
+    border: none;
+  }
+  .btn-custom.btn-warning:hover {
+    
+    background-color: rgb(236, 177, 109);
+  }
+  .btn-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  .btn-custom.btn-danger {
+    background-color:#38a169;
+    border: none;
+  }
+.btn-custom.btn-danger:hover {
+  background-color: #2f855a;
+  box-shadow: 0 8px 20px rgba(197, 48, 48, 0.4);
+}
+
+  @media (max-width: 576px) {
+    .btn-custom {
+      min-width: 100%;
+      margin: 10px 0;
+    }
+  }
+</style>
+<center>
+<div class="dashboard-container">
+  <h2>Dashboard</h2>
+  <p>Welcome, <strong>{{ session['username'] }}</strong>!</p>
+  <p>Your current budget streak: <strong>{{ streak }}🔥</strong> months under budget.</p>
+  
+  <a href="{{ url_for('history') }}" class="btn btn-custom btn-primary">
+    <img src="{{ url_for('static', filename='history.png') }}" alt="History" class="btn-icon" />
+    History
+  </a>
+  <!-- New: Monthly Reset button -->
+  <a href="{{ url_for('monthly_reset') }}" class="btn btn-custom btn-danger">
+    <i class="fas fa-redo-alt"></i>
+    Monthly Reset
+  </a>
+  <a href="{{ url_for('budget_setup') }}" class="btn btn-custom btn-success">
+    <img src="{{ url_for('static', filename='monthly_budget.png') }}" alt="Monthly Budget" class="btn-icon" />
+    Monthly Budget
+  </a>
+  <a href="{{ url_for('add_expense') }}" class="btn btn-custom btn-info">
+    <img src="{{ url_for('static', filename='add_expense.png') }}" alt="Add Expense" class="btn-icon" />
+    Add Expense
+  </a>
+
+  <a href="{{ url_for('reports') }}" class="btn btn-custom btn-warning">
+    <i class="fas fa-chart-bar"></i> Reports
+  </a>
+</div>
+</center>
+{% endblock %}

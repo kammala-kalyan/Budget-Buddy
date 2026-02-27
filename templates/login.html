@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  h2 {
+    color: #2f855a;
+    margin: 0;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .mb-3 label {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .btn-primary {
+    background-color: #2f855a;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+
+  .btn-primary:hover {
+    background-color: #276749;
+  }
+
+  .alert-danger {
+    text-align: center;
+    max-width: 500px;
+    margin: 10px auto;
+  }
+
+  /* New styles for image beside heading */
+  .heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .login-icon {
+    width: 40px;
+    height: 40px;
+  }
+</style>
+
+<!-- Heading with image -->
+<div class="heading-container">
+  <h2>Login</h2>
+  <img src="{{ url_for('static', filename='login.png') }}" alt="Login Icon" class="login-icon">
+</div>
+
+{% if msg %}
+  <div class="alert alert-danger">{{ msg }}</div>
+{% endif %}
+
+<form method="post">
+  <div class="mb-3">
+    <label>🔒 Username</label>
+    <input type="text" name="username" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>🔑 Password </label>
+    <input type="password" name="password" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Buddy</title>
+  <link rel="icon" href="{{ url_for('static', filename='logo_icon.png') }}" type="png" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      animation: fadePulse 3s ease-in-out infinite;
+    }
+
+    /*.container {
+      text-align: center;
+      animation: floatUp 2s ease-in-out infinite alternate;
+    }*/
+    .container {
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.95);
+  animation: pageEntrance 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+@keyframes pageEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    
+    .welcome-message {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: black;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: welcomeFadeIn 10s ease-out forwards;
+      margin-top: 7ex;
+    }
+
+    img.logo {
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px auto 25px auto;
+      animation: logoBounce 5s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      color: #2f855a;
+      animation: colorPulse 2s infinite alternate;
+      text-shadow: 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.4);
+
+    }
+
+    h1, .caption, .buttons {
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+    }
+
+    h1 { animation-delay: 0.8s; }
+    .caption { animation-delay: 1.2s; }
+    .buttons { animation-delay: 1.6s; }
+
+    .caption {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      background-color: #2f855a;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons a:hover {
+      background-color: #276749;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadePulse {
+      0%, 100% { background-color: #f4f4f4; }
+      50% { background-color: #e8f5ec; }
+    }
+
+    @keyframes logoBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes welcomeFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes colorPulse {
+      0% { color: #2f855a; }
+      50% { color: #1e4d35; }
+      100% { color: #2f855a; }
+    }
+
+    /* Class to stop animations */
+    .stop-animation {
+      animation: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="mainContainer">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Budget Buddy Logo" class="logo">
+    <h1>Budget Buddy</h1>
+    <p class="caption">A Personal Monthly Budget Tracker</p>
+
+    <div class="buttons">
+      <a href="{{ url_for('register') }}" onclick="stopAnimations()">Register</a>
+      <a href="{{ url_for('login') }}" onclick="stopAnimations()">Login</a>
+    </div>
+    <div class="welcome-message">A budget is telling your money where to go instead of wondering where it went.</div>
+    
+  </div>
+
+  <script>
+    function stopAnimations() {
+      document.body.classList.add('stop-animation');
+      document.getElementById('mainContainer').classList.add('stop-animation');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  .reset-container {
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  }
+
+  .reset-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2f855a;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .reset-summary {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .alert {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .btn-danger, .btn-outline-danger {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: 0.3s ease;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+
+  .btn-outline-danger {
+    background-color: transparent;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+</style>
+<div class="reset-container">
+  <h2>Monthly Reset</h2>
+
+  {% if no_budget %}
+    <div class="alert alert-info text-center">
+      No active budget found to reset!
+    </div>
+  {% else %}
+    <p class="reset-summary">Total Budget: ${{ total }} | Spent: ${{ used }}</p>
+
+    {% if used <= total %}
+      <div class="alert alert-success">
+        ✅ Great job! You've stayed under budget. Your streak will increase.
+      </div>
+    {% else %}
+      <div class="alert alert-warning">
+        ⚠️ Budget exceeded! Your streak will reset.
+      </div>
+    {% endif %}
+
+    <div class="d-grid gap-2">
+      <!-- Archive & Reset Current Month -->
+      <form method="post" action="{{ url_for('monthly_reset') }}">
+        <button type="submit" class="btn btn-danger">Archive & Reset Current Month</button>
+      </form>
+
+      <!-- Reset All Budgets -->
+      <form method="post" action="{{ url_for('reset_all') }}">
+        <button type="submit" class="btn btn-outline-danger">Reset All Budgets</button>
+      </form>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}

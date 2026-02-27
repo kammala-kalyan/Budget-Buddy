@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  h2 {
+    color: #2f855a;
+    margin: 0;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .mb-3 label {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .btn-success {
+    background-color: #2f855a;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+
+  .btn-success:hover {
+    background-color: #276749;
+  }
+
+  .alert-warning {
+    text-align: center;
+    max-width: 500px;
+    margin: 10px auto;
+  }
+
+  /* New styles for image beside heading */
+  .heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .register-icon {
+    width: 40px;
+    height: 40px;
+  }
+</style>
+
+<!-- Heading with image -->
+<div class="heading-container">
+  <img src="{{ url_for('static', filename='register.png') }}" alt="Register Icon" class="register-icon">
+  <h2>Register</h2>
+</div>
+
+{% if msg %}
+  <div class="alert alert-warning">{{ msg }}</div>
+{% endif %}
+
+<form method="post">
+  <div class="mb-3">
+    <label>🔒 Username</label>
+    <input type="text" name="username" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Email 📧</label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>🔑 Password</label>
+    <input type="password" name="password" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-success">Register</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Profile</h2>
+{% if msg %}
+  <div class="alert alert-info">{{ msg }}</div>
+{% endif %}
+<form method="post">
+  <div class="mb-3">
+    <label>Update Email</label>
+    <input type="email" name="email" class="form-control" value="{{ email }}">
+  </div>
+  <div class="mb-3">
+    <label>New Password</label>
+    <input type="password" name="password" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+{% endblock %}

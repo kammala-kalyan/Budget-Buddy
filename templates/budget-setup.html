@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Monthly Budget Setup</h2>
+{% if msg %}
+  <div class="alert alert-success">{{ msg }}</div>
+{% endif %}
+<form method="post">
+  <div class="mb-3">
+    <label>Start Date</label>
+    <input type="date" name="start_date" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>End Date</label>
+    <input type="date" name="end_date" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Total Budget</label>
+    <input type="number" name="total_budget" step="0.01" class="form-control" required>
+  </div>
+  <h4>Categories</h4>
+  <table id="categoriesTable" class="table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Expected (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" name="category_name" class="form-control" placeholder="Category"></td>
+        <td><input type="number" name="category_amount" class="form-control" placeholder="Percentage (%)"></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-secondary" onclick="addCategoryRow()">Add Category</button>
+  <button type="submit" class="btn btn-primary">Save Budget</button>
+</form>
+
+<script>
+  function addCategoryRow() {
+    const tbody = document.querySelector('#categoriesTable tbody');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <td><input type="text" name="category_name" class="form-control" placeholder="Category"></td>
+      <td><input type="number" name="category_amount" class="form-control" placeholder="Percent (%)"></td>
+    `;
+    tbody.appendChild(newRow);
+  }
+</script>
+{% endblock %}

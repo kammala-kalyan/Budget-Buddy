@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  .reports-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+  }
+
+  .reports-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2f855a;
+    font-weight: 700;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 400px !important;
+  }
+</style>
+
+{% if msg %}
+  <div class="alert alert-warning text-center">{{ msg }}</div>
+{% endif %}
+
+{% if not all_reports %}
+  <div class="alert alert-info text-center">
+    No budget reports found.
+  </div>
+{% endif %}
+
+{% for report in all_reports %}
+  <div class="reports-container">
+    <h2>Budget Period: {{ report.start_date }} to {{ report.end_date }}</h2>
+    <canvas id="chart{{ loop.index }}"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    (function() {
+      const idx       = {{ loop.index }};
+      const labels    = {{ report.labels|tojson }};
+      const expected  = {{ report.expected|tojson }};
+      const spent     = {{ report.spent|tojson }};
+
+      const maxVal    = Math.max(...expected.concat(spent));
+      const step      = Math.ceil(maxVal / 10);
+      const maxY      = step * 10;
+
+      new Chart(
+        document.getElementById('chart' + idx),
+        {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Expected',
+                data: expected,
+                backgroundColor: 'rgba(47, 133, 90, 0.8)',
+                borderRadius: 6
+              },
+              {
+                label: 'Actual',
+                data: spent,
+                backgroundColor: 'rgb(222, 170, 44)',
+                borderRadius: 6
+              }
+            ]
+          },
+          options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Expected vs Actual Spending',
+                font: { size: 16 }
+              },
+              legend: { position: 'top' }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: maxY,
+                ticks: { stepSize: step, color: '#555', font: { size: 12 } },
+                grid: { color: '#eee' }
+              },
+              x: {
+                ticks: { color: '#444' },
+                grid: { display: false }
+              }
+            }
+          }
+        }
+      );
+    })();
+  </script>
+{% endfor %}
+
+{% endblock %}

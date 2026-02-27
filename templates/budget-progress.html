@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Budget Progress</h2>
+<p>Total Budget: ${{ total }} | Spent: ${{ used }}</p>
+
+{% for name, expected, spent in categories %}
+  {% if expected %}
+    {# Compute percent as Decimal * int, so no float multiplication #}
+    {% set percent = (spent / expected * 100) %}
+  {% else %}
+    {% set percent = 0 %}
+  {% endif %}
+
+  <div>{{ name }}: ${{ spent }} / ${{ expected }}</div>
+  <div class="progress mb-3">
+    {% if percent <= 75 %}
+      <div class="progress-bar bg-success" style="width:{{ percent|round(1) }}%;">{{ percent|round(1) }}%</div>
+    {% elif percent <= 100 %}
+      <div class="progress-bar bg-warning" style="width:{{ percent|round(1) }}%;">{{ percent|round(1) }}%</div>
+    {% else %}
+      <div class="progress-bar bg-danger" style="width:{{ percent|round(1) }}%;">{{ percent|round(1) }}%</div>
+    {% endif %}
+  </div>
+{% endfor %}
+{% endblock %}

@@ -11,11 +11,11 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'your_fallback_dev_secret')
 
 # MySQL configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
-app.config['MYSQL_DB'] = 'budgetbuddy'
-app.config['MYSQL_PORT'] = 3307
+app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
+app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'root')
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', 'root')
+app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'budgetbuddy')
+app.config['MYSQL_PORT'] = int(os.environ.get('MYSQL_PORT', 3306))
 mysql = MySQL(app)
 
 # Decorator to require login
